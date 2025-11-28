@@ -19,7 +19,7 @@ export const syncUserCreation = inngest.createFunction(
       _id: id,
       email: email_addresses[0].email_address,
       name: first_name + " " + last_name,
-      imageurl: image_url,
+      imageUrl: image_url || "https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png",
     };
 
     await connectDB();
@@ -38,10 +38,9 @@ export const syncUserUpdate = inngest.createFunction(
     const { id, first_name, last_name, email_addresses, image_url } = event.data;
 
     const userData = {
-      _id: id,
       email: email_addresses[0].email_address,
       name: first_name + " " + last_name,
-      imageurl: image_url,
+      imageUrl: image_url || "https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png",
     };
 
     await connectDB();
