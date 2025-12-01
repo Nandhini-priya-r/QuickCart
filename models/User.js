@@ -1,23 +1,16 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema(
-  {
-    clerkId: { type: String, required: true, unique: true },
 
-    // Name should NOT be required because Clerk sometimes sends empty values
-    name: { type: String, default: "" },
+const userSchema = new mongoose.Schema({
 
-    email: { type: String, required: true, unique: true },
+    _id: { type: String, required: true},
+    name: { type: String, required: true},
+    email: { type: String, required: true, unique: true},
+    imageUrl: { type: String, required: true},
+    cartItems: {type: Object, default: {}}
 
-    // Always safe with fallback image
-    imageUrl: {
-      type: String,
-      default: "https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png",
-    },
+},{  minimize: false})
 
-    cartItems: { type: Object, default: {} },
-  },
-  { timestamps: true }
-);
+const User = mongoose.model.user || mongoose.model('user',userSchema)
 
-export default mongoose.models.User || mongoose.model("User", userSchema);
+export default User
