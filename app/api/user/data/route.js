@@ -13,8 +13,10 @@ export async function GET(req) {
         message: "No Clerk User ID found",
       });
     }
-
+    console.log("db connected intial,",userId)
+    
     await connectDB();
+    console.log("db connected after")
 
     const user = await User.findOne({ clerkId: userId });
 

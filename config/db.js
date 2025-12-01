@@ -7,6 +7,7 @@ if (!cached) {
 }
 
 async function connectDB() {
+   console.log("db connected level 1")
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
@@ -19,7 +20,7 @@ async function connectDB() {
       opts
     );
   }
- console.log("db connected sucessfully")
+
   cached.conn = await cached.promise;
   return cached.conn;
 }
