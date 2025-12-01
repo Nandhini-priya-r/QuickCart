@@ -19,7 +19,7 @@ async function connectDB() {
       opts
     );
   }
-
+ console.log("db connected sucessfully")
   cached.conn = await cached.promise;
   return cached.conn;
 }
