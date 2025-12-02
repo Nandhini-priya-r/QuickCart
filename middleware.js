@@ -1,6 +1,8 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 
-export default clerkMiddleware();
+export default clerkMiddleware({
+  ignoredRoutes: ["/api/inngest"],  // <-- Inngest must bypass Clerk
+});
 
 export const config = {
   matcher: [
