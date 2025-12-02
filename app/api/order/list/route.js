@@ -11,15 +11,14 @@ export async function GET(request) {
       return NextResponse.json({
         success: false,
         message: "User is not authenticated",
+        orders: []
       });
     }
 
     await connectDB();
 
-    // Fetch all orders for this user
-    const orders = await Order.find({ userId })
-      .populate("address")
-      .populate("items.product");
+    // Fetch all orders for this user (no populate needed)
+    const orders = await Order.find({ userId }).sort({ createdAt: -1 });
 
     return NextResponse.json({
       success: true,

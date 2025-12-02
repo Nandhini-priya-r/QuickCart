@@ -42,30 +42,35 @@ export const AppContextProvider = (props) => {
        }
     }
 
-    const fetchUserData = async () => {
-      try {
-        
-        
-        if(user.publicMetadata.role ==='seller'){
-            setIsSeller(true)
-        }
+  const fetchUserData = async () => {
+  try {
 
-        const token = await getToken()
-
-        const {data} = await axios.get('/api/user/data', { headers: { Authorization: `Bearer ${token}` }})
-
-        if (data.success){
-            setUserData(data.user)
-            setCartItems(data.user.cartItems)
-        } else {
-            toast. error(data.message)
-        }
-
-        // setUserData(userDummyData)
-      } catch (error) {
-        toast . error(error.message)
-      }
+    // FIXED: Safe seller check
+    if (user?.publicMetadata?.role === "seller") {
+      setIsSeller(true);
+    } else {
+      setIsSeller(false);
     }
+
+    const token = await getToken();
+    if (!token) return; // when no login, stop execution
+
+    const { data } = await axios.get("/api/user/data", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (data.success) {
+      setUserData(data.user);
+      setCartItems(data.user.cartItems);
+    } else {
+      toast.error(data.message);
+    }
+
+  } catch (error) {
+    toast.error(error.message);
+  }
+};
+
 
     const addToCart = async (itemId) => {
 
@@ -142,9 +147,9 @@ export const AppContextProvider = (props) => {
     }, [])
 
     useEffect(() => {
-        if (user) {
+         
                fetchUserData()
-        }
+        
      
     }, [user])
 
