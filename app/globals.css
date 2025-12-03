@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary: #ea580c;               /* Tailwind orange-600 */
+  --text-muted: #6b7280;            /* gray-500 */
+  --text-dark: #374151;             /* gray-700 */
+  --border: rgba(107, 114, 128, 0.3);
+  --card-bg: rgba(107, 114, 128, 0.10);
+  --hover-bg: rgba(243, 244, 246, 0.9);
+  --light-bg: #E6E9F2;              /* Banner/Slider background */
+}
+
+
 * {
     scroll-behavior: smooth;
 }
